@@ -1,6 +1,8 @@
 function Stack(item){
   this.item = item;
   this.stackSize = 1;
+  this.x = 0;
+  this.y = 0;
   this.maxSize = item.stackSize;
 }
 function Inventory(MAX_SIZE){
@@ -12,14 +14,15 @@ function Inventory(MAX_SIZE){
 
 Inventory.prototype.render = function(){
   for(var i=0;i<this.stacks.length;i++){
-    context.drawImage(this.stacks[i].item.image, 64+i*64, 440,48,48);
+    var stack = this.stacks[i];
+    context.drawImage(stack.item.image, stack.x+(64+i*64), stack.y+440,48,48);
     context.font = "32px Arial";
-    context.fillText(""+this.stacks[i].stackSize, 64+i*64, 430);
+    context.fillText(""+this.stacks[i].stackSize, stack.x+(64+i*64), stack.y+430);
     if(i==this.selected){
       context.beginPath();
       context.lineWidth="3";
       context.strokeStyle="pink";
-      context.rect(64+i*64,440,48,48);
+      context.rect(stack.x+(64+i*64),stack.y+440,48,48);
       context.stroke();
     }
 
@@ -31,6 +34,24 @@ Inventory.prototype.tick = function(){
   if(this.selected<0)this.selected = this.stacks.length-1;
   this.currentItem = this.stacks[this.selected].item;
   player.inHand = this.currentItem;
+  if(hud.menuOut){
+    for(var i=0;i<this.stacks.length;i++){
+      var yoff = 256-Math.floor(i/3)*64;
+      var xoff = 256-Math.floor(i/3)*64-(Math.floor(i/3)>0 ? (i%3*128+((Math.floor(i/3)>1?2:0)*(32*Math.floor(i/3)))): 0);
+      var stack = this.stacks[i];
+      stack.x= Easing.easeOutExpo(hud.ticks,0,xoff,50);
+      stack.y= -Easing.easeOutExpo(hud.ticks,0,yoff,50);
+    }
+  }
+  if(!hud.menuOut&&hud.ticks<=50&&hud.opened){
+    for(var i=0;i<this.stacks.length;i++){
+      var yoff = 256-Math.floor(i/3)*64;
+      var xoff = 256-Math.floor(i/3)*64-(Math.floor(i/3)>0 ? (i%3*128+((Math.floor(i/3)>1?2:0)*(32*Math.floor(i/3)))): 0);
+      var stack = this.stacks[i];
+      stack.x= xoff-Easing.easeOutExpo(hud.ticks,0,xoff,50);
+      stack.y= Easing.easeOutExpo(hud.ticks,0,yoff,50)-yoff;
+      }
+    }
 };
 Inventory.prototype.addItem = function(item){
   for(var i=0;i<this.stacks.length;i++){

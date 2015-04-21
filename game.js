@@ -22,6 +22,7 @@ var isRunning = false;
 var startTime = new Date().getTime();
 var player = null;
 var level = null;
+var hud = new GuiHUD();
 
 function quitGame(){
   //exit stuff here
@@ -47,7 +48,7 @@ function tick(){
   if(!gameOver&&player!=null){
     player.tick();
   }
-  //hud.tick();
+  hud.tick();
 }
 
 function render(){
@@ -74,6 +75,7 @@ function render(){
   }
   if(player!=null)player.render(xoff,yoff);
   context.fillText("FPS: "+fps, 10, 10);
+  hud.render();
 
 }
 

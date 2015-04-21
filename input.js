@@ -3,7 +3,8 @@ var Input = (function() {
   right = false,
   up = false,
   down = false,
-  action = false
+  action = false,
+  crafting = false,
   mouseScroll = 0;
   document.onkeydown = function (evt) {
     var event = evt || window.event;
@@ -17,6 +18,8 @@ var Input = (function() {
       down = true;
     }else if (event.keyCode == 32) {
       action = true;
+    }else if (event.keyCode == 9||event.keyCode == 69) {
+      crafting = true;
     }
 
   };
@@ -34,6 +37,8 @@ var Input = (function() {
       down = false;
     }else if (event.keyCode == 32) {
       action = false;
+    }else if (event.keyCode == 9||event.keyCode == 69) {
+      crafting = false;
     }
   };
   var onMouseWheel = function(evt){
@@ -48,6 +53,8 @@ var Input = (function() {
     leftPressed: function() { return left; },
     rightPressed: function() { return right; },
     actionPressed: function() { return action; },
+    craftingPressed: function() { return crafting; },
+    craftingUnPress: function() { crafting =false; },
     mouseScroll: function() { var m = mouseScroll; mouseScroll =0;return m; }
   };
 

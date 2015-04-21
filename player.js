@@ -1,7 +1,7 @@
 function Player(username,x,y,z){
   Entity.call(this,x,y,z);
   this.username = username;
-  this.inventory = new Inventory(2);
+  this.inventory = new Inventory(9);
   this.inventory.addItem(woodenSpade);
   this.inHand = this.inventory.selectedItem;
   this.bb = [0,32,0,32];
@@ -14,7 +14,6 @@ function Player(username,x,y,z){
 }
 
 Player.prototype.render = function(xoff,yoff){
-  this.inventory.render();//should be moved to guihud or equivalent
   context.beginPath();
   context.lineWidth="3";
   context.strokeStyle="red";

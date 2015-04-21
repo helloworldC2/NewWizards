@@ -12,7 +12,7 @@ Item.prototype.render = function(x,y){
 };
 Item.prototype.use = function(x,y,z){
   var t = level.getTile(x,y,z);
-  if(t.isSolid)return;
+  if(t.isSolid||t.id==this.id)return;
   if(t == AIR)level.setTile(x,y,z,tile[this.id]);
   if(!t.isSolid&&t != AIR)level.setTile(x,y,z,tile[this.id+3]);//offset to solid version
   player.inventory.removeItem(this);
@@ -140,7 +140,7 @@ ItemBucket.prototype.use = function(x,y,z){
   }
 };
 var items = [];
-var itemDirt = new Item(0,"Chunk of dirt",dirtImg,4);
+var itemDirt = new Item(0,"Chunk of dirt",dirtImg,1);
 var woodenSpade = new ItemSpade(1,"Wooden Spade",sandImg,5);
 var woodenAxe = new ItemAxe(2,"Wooden axe",sandImg,5);
 var itemLog = new Item(3,"Chunk of log",logsImg);
