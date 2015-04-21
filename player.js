@@ -2,7 +2,7 @@ function Player(username,x,y,z){
   Entity.call(this,x,y,z);
   this.username = username;
   this.inventory = new Inventory(9);
-  this.inventory.addItem(woodenSpade);
+  this.inventory.addItem(fist);
   this.inHand = this.inventory.selectedItem;
   this.bb = [0,32,0,32];
   this.actionCoolDown = 0;
@@ -42,7 +42,6 @@ Player.prototype.tick = function () {
   if(this.getTileUnder()==steps&&this.z<3)this.z++;
   this.actionCoolDown--;
   this.ticks++;
-  this.inventory.tick();
   //add degrade food
   this.centreX = this.x+16;
   this.centreY = this.y+16;

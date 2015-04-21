@@ -42,10 +42,10 @@ function bbIntersect(bb1,x1,y1,bb2,x2,y2){
 function tick(){
   if(!isRunning)return;
 
-  if(!isMultiplayer&&!gameOver){
+  if(!isMultiplayer&&!gameOver&&!hud.menuOut){
     level.tick();
   }
-  if(!gameOver&&player!=null){
+  if(!gameOver&&player!=null&&!hud.menuOut){
     player.tick();
   }
   hud.tick();

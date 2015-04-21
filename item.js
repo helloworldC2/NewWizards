@@ -43,7 +43,7 @@ ItemSpade.prototype.use = function(x,y,z){
       }
 
       level.setTile(x,y-1,z-1,steps);
-      var dirt = new EntityItem(itemDirt,x<<5,y<<5,z,(Math.random()*2)-1);
+      var dirt = new EntityItem(items[tile.id],x<<5,y<<5,z,(Math.random()*2)-1);
       this.durability--;
       if(this.durability<0)player.inventory.removeItem(this);
     }
@@ -139,10 +139,42 @@ ItemBucket.prototype.use = function(x,y,z){
     }
   }
 };
+function ItemFist(id,name,image,power){
+  Item.call(this,id,name,image,1);
+  this.power = power;
+  this.durability = 1000000;
+}
+ItemFist.prototype.render = Item.prototype.render;
+
+ItemFist.prototype.use = function(x,y,z){
+  var tile = level.getTile(x,y,z);
+  if(tile.tool=="spade"){
+    //console.log("Set tile at"+x+","+y+"z"+z+" to "+AIR);
+    level.incrementData(x,y,z,this.power+Math.floor((Math.random()*this.power)));
+    if(level.getData(x,y,z)>20){
+      level.setTile(x,y,z,AIR);
+      for(var i=0;i<9;i++){
+        var dx = (i%3)-1;
+        var dy = Math.floor(i/3)-1;
+        if(level.getTile(x+dx,y+dy,z-1).isSolid){
+          level.setTile(x+dx,y+dy,z-1,stoneFloor);
+        }
+      }
+
+      level.setTile(x,y-1,z-1,steps);
+      var dirt = new EntityItem(itemDirt,x<<5,y<<5,z,(Math.random()*2)-1);
+      this.durability--;
+      if(this.durability<0)player.inventory.removeItem(this);
+    }
+  }
+  ///////////!!!!INSERT ALL COMLETED TOOL FUNCTIONS INTO HERE!!!!!!\\\\\\\\\\\
+};
 var items = [];
-var itemDirt = new Item(0,"Chunk of dirt",dirtImg,1);
+
+var itemDirt = new Item(0,"Chunk of dirt",dirtImg,8);
 var woodenSpade = new ItemSpade(1,"Wooden Spade",sandImg,5);
 var woodenAxe = new ItemAxe(2,"Wooden axe",sandImg,5);
 var itemLog = new Item(3,"Chunk of log",logsImg);
 var woodenPickAxe = new ItemPickAxe(4,"Wooden Pickaxe",sandImg,5);
 var Bucket = new ItemBucket(5,"bucket",sandImg,5);
+var fist = new ItemFist(6,"Just your hand",dirtImg,1);

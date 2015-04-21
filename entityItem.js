@@ -3,7 +3,7 @@ function EntityItem(item,x,y,z,dx){
   this.item = item;
   this.initY = y;
   this.dx = dx;
-  this.bb = [0,16,0,16];
+  this.bb = [-16,32,-16,32];
   level.entities.push(this);
 }
 EntityItem.prototype.render = function(xoff,yoff){

@@ -90,7 +90,7 @@ Level.prototype.generateLevel = function(seed){
     for (var y = 0; y < this.height; y++) {
       if(this.getTile(x,y,2)!=grass)continue;
       var n = noise.perlin2(x/8, y/8);
-      if(n>0)this.tiles[2][x+(y*this.width)] = tree.id;
+      if(n>0.3)this.tiles[2][x+(y*this.width)] = tree.id;
     }
   }
   this.data[0] = Array.apply(null, new Array(this.width*this.height)).map(Number.prototype.valueOf,0);
@@ -125,17 +125,23 @@ Level.prototype.render = function(xoff,yoff){
   var xmin,xmax,ymin,ymax;
   if(xoff<1){
     xmin=0;
-    xmax = 40;
+    xmax = 32;
+  }else if(xoff>3071){
+    xmin = this.width-32;
+    xmax = this.width;
   }else{
-    xmin = (player.x>>5)-20 < 0 ? 0 : (player.x>>5)-20;
-    xmax = (player.x>>5)+21 > this.width ? this.width : (player.x>>5)+21;
+    xmin = (player.x>>5)-16 < 0 ? 0 : (player.x>>5)-16;
+    xmax = (player.x>>5)+17 > this.width ? this.width : (player.x>>5)+17;
   }
   if(yoff<1){
     ymin=0;
-    ymax = 23;
+    ymax = 18;
+  }else if(yoff>3519){
+    ymin = this.height-18;
+    ymax = this.height;
   }else{
-    ymin = (player.y>>5)-12 < 0 ? 0 : (player.y>>5)-12;
-    ymax = (player.y>>5)+13 > this.height ? this.height : (player.y>>5)+13;
+    ymin = (player.y>>5)-9 < 0 ? 0 : (player.y>>5)-9;
+    ymax = (player.y>>5)+10 > this.height ? this.height : (player.y>>5)+10;
   }
 
   for (var x = xmin; x < xmax; x++) {

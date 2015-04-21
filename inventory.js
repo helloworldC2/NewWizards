@@ -29,6 +29,10 @@ Inventory.prototype.render = function(){
   }
 };
 Inventory.prototype.tick = function(){
+  if(Input.throwPressed()&&this.currentItem!=fist){
+    var dirt = new EntityItem(this.currentItem,player.x+(player.movingDir==3?70:(player.movingDir==2?-32:0)),player.y+(player.movingDir==0?48:(player.movingDir==1?-64:0)),player.z,player.movingDir==3?1:player.movingDir==2?-1:(Math.random()*2)-1);
+    this.removeItem(this.currentItem);
+  }
   this.selected+=Input.mouseScroll();
   if(this.selected>=this.stacks.length)this.selected = 0;
   if(this.selected<0)this.selected = this.stacks.length-1;
@@ -77,4 +81,13 @@ Inventory.prototype.removeItem = function(item){
     }
   }
 
+};
+Inventory.prototype.contains = function(item,amount){
+  var numFound = 0;
+  for(var i=0;i<this.stacks.length;i++){
+    var stack = this.stacks[i];
+    if(stack.item == item)numFound+=stack.stackSize;
+  }
+  if(numFound>=amount)return true;
+  return false;
 };
