@@ -71,6 +71,8 @@ Level.prototype.generateLevel = function(seed){
   this.tiles[1] = Array.apply(null, new Array(this.width*this.height)).map(Number.prototype.valueOf,5);
   this.tiles[2] = Array.apply(null, new Array(this.width*this.height)).map(Number.prototype.valueOf,2);
 
+
+  
   for (var x = 0; x < this.width; x++) {
     for (var y = 0; y < this.height; y++) {
       var n = noise.perlin2(x/25, y/25);
@@ -94,9 +96,20 @@ Level.prototype.generateLevel = function(seed){
   this.data[0] = Array.apply(null, new Array(this.width*this.height)).map(Number.prototype.valueOf,0);
   this.data[1] = Array.apply(null, new Array(this.width*this.height)).map(Number.prototype.valueOf,0);
   this.data[2] = Array.apply(null, new Array(this.width*this.height)).map(Number.prototype.valueOf,0);
+  for (var x = 0; x < this.width; x++) {
+	  for (var y = 0; y < this.height; y++) {
+		  j = Math.floor( Math.random() * ( 0 + 2 ) );
+		  if(Math.floor(Math.random() * 10)==1&&this.getTile(x,y,2).hasChildren())this.tiles[2][x+(y*this.width)] = grass.getChildren()[j].id
+		  //console.log('Testing console');
+	    }
+    }
   if(isMultiplayer&&isHost)sendSeed(seed);
 };
+ 
 
+ 
+
+	
 Level.prototype.tick = function(){
   this.ticks++;
   for (var i = 0; i < this.entities.length; i++) {

@@ -6,6 +6,38 @@ grassImg.onload = function () {
   itemsLoaded++;
 };
 grassImg.src ='tiles/grass.png';
+var larvaImg = new Image();
+larvaImg.onload = function () {
+  itemsLoaded++;
+};
+larvaImg.src ='tiles/larva.png';
+var stumpImg = new Image();
+stumpImg.onload = function () {
+  itemsLoaded++;
+};
+stumpImg.src ='tiles/stump.png';
+
+var logsImg = new Image();
+logsImg.onload = function () {
+  itemsLoaded++;
+};
+logsImg.src ='tiles/logs.png';
+
+var dirtImg = new Image();
+dirtImg.onload = function () {
+  itemsLoaded++;
+};
+dirtImg.src ='tiles/dirt.png';
+var grass2Img = new Image();
+grass2Img.onload = function () {
+  itemsLoaded++;
+};
+grass2Img.src ='tiles/grass2.png';
+var grass3Img = new Image();
+grass3Img.onload = function () {
+  itemsLoaded++;
+};
+grass3Img.src ='tiles/grass3.png';
 
 var waterImg = new Image();
 waterImg.onload = function () {
@@ -42,6 +74,11 @@ startImg.onload = function () {
   itemsLoaded++;
 };
 startImg.src ='tiles/start.png';
+var dmg0Img = new Image();
+dmg0Img.onload = function () {
+  itemsLoaded++;
+};
+dmg0Img.src ='tiles/dmg0.png';
 
 var dmg1Img = new Image();
 dmg1Img.onload = function () {
@@ -78,9 +115,3 @@ dmg6Img.onload = function () {
   itemsLoaded++;
 };
 dmg6Img.src ='tiles/dmg6.png';
-
-var lavaImg = new Image();
-lavaImg.onload = function () {
-  itemsLoaded++;
-};
-lavaImg.src ='tiles/larva.png';
