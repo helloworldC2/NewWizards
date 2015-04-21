@@ -46,6 +46,7 @@ ItemSpade.prototype.use = function(x,y,z){
     }
   }
 };
+function ItemAxe(id,name,image,power){
 
 var items = [];
 var itemDirt = new Item(0,"Chunk of dirt",grassImg,4);
