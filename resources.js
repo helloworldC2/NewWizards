@@ -115,3 +115,21 @@ dmg6Img.onload = function () {
   itemsLoaded++;
 };
 dmg6Img.src ='tiles/dmg6.png';
+
+var pFront = new Image();
+pFront.onload = function () {
+  itemsLoaded++;
+};
+pFront.src ='robots/GFront.png';
+
+var pBack = new Image();
+pBack.onload = function () {
+  itemsLoaded++;
+};
+pBack.src ='robots/GBack.png';
+
+var pSide = new Image();
+pSide.onload = function () {
+  itemsLoaded++;
+};
+pSide.src ='robots/GSide.png';

@@ -26,6 +26,6 @@ EntityItem.prototype.tick = function(){
 
 EntityItem.prototype.getTileUnder = Entity.prototype.getTileUnder;
 EntityItem.prototype.interact = function(){
-  player.inventory.addItem(this.item);
+  if(player.inventory.addItem(this.item))
   level.entities.splice(level.entities.indexOf(this), 1);
 };

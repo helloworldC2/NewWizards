@@ -10,13 +10,16 @@ function Item(iD,name,image,stackSize){
 Item.prototype.render = function(x,y){
   context.drawImage(this.image, x, y,16,16);
 };
-Item.prototype.use = function(level,x,y,z){
-
+Item.prototype.use = function(x,y,z){
+  var t = level.getTile(x,y,z);
+  if(t.isSolid)return;
+  if(t == AIR)level.setTile(x,y,z,tile[this.id]);
+  if(!t.isSolid&&t != AIR)level.setTile(x,y,z,tile[this.id+3]);//offset to solid version
+  player.inventory.removeItem(this);
 };
 
-function ItemTile(id,name,image){
 
-}
+
 function ItemSpade(id,name,image,power){
   Item.call(this,id,name,image,1);
   this.power = power;
@@ -57,9 +60,9 @@ ItemAxe.prototype.use = function(x,y,z){
   var tile = level.getTile(x,y,z);
   if(tile.tool=="axe"){
     //console.log("Set tile at"+x+","+y+"z"+z+" to "+AIR);
-    level.incrementData(x,y,z,this.power+Math.floor((Math.random()*8)-4));
+    llevel.incrementData(x,y,z,this.power+Math.floor((Math.random()*8)-4));
     if(level.getData(x,y,z)>20){
-      level.setTile(x,y,z,itemLog);
+      level.setTile(x,y,z,AIR);
       for(var i=0;i<9;i++){
         var dx = (i%3)-1;
         var dy = Math.floor(i/3)-1;
@@ -89,7 +92,7 @@ ItemPickAxe.prototype.use = function(x,y,z){
     //console.log("Set tile at"+x+","+y+"z"+z+" to "+AIR);
     level.incrementData(x,y,z,this.power+Math.floor((Math.random()*8)-4));
     if(level.getData(x,y,z)>20){
-      level.setTile(x,y,z,itemLog);
+      level.setTile(x,y,z,AIR);
       for(var i=0;i<9;i++){
         var dx = (i%3)-1;
         var dy = Math.floor(i/3)-1;
@@ -120,7 +123,7 @@ ItemBucket.prototype.use = function(x,y,z){
     //console.log("Set tile at"+x+","+y+"z"+z+" to "+AIR);
     level.incrementData(x,y,z,this.power+Math.floor((Math.random()*8)-4));
     if(level.getData(x,y,z)>20){
-      level.setTile(x,y,z,itemLog);
+      level.setTile(x,y,z,AIR);
       for(var i=0;i<9;i++){
         var dx = (i%3)-1;
         var dy = Math.floor(i/3)-1;

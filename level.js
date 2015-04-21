@@ -72,7 +72,7 @@ Level.prototype.generateLevel = function(seed){
   this.tiles[2] = Array.apply(null, new Array(this.width*this.height)).map(Number.prototype.valueOf,2);
 
 
-  
+
   for (var x = 0; x < this.width; x++) {
     for (var y = 0; y < this.height; y++) {
       var n = noise.perlin2(x/25, y/25);
@@ -105,11 +105,11 @@ Level.prototype.generateLevel = function(seed){
     }
   if(isMultiplayer&&isHost)sendSeed(seed);
 };
- 
 
- 
 
-	
+
+
+
 Level.prototype.tick = function(){
   this.ticks++;
   for (var i = 0; i < this.entities.length; i++) {
@@ -159,13 +159,14 @@ Level.prototype.render = function(xoff,yoff){
       }else{
         this.getTile(x,y,z).render((x<<5)-xoff,(y<<5)-yoff-16,this.getData(x,y,z));
         this.getTile(x,y+1,z).render((x<<5)-xoff,(y+1<<5)-yoff-16,this.getData(x,y,z));
-        for (var i = 0; i < this.entities.length; i++) {
-          if(this.entities[i].z==z)this.entities[i].render(xoff,yoff+16,this.getData(x,y,z));
-        }
+        // for (var i = 0; i < this.entities.length; i++) {
+        //   if(this.entities[i].z==z)this.entities[i].render(xoff,yoff+16,this.getData(x,y,z));
+        // }
         this.getTile(x,y-1,player.z).render((x<<5)-xoff,(y-1<<5)-yoff,this.getData(x,y,z));
       }
       for (var i = 0; i < this.entities.length; i++) {
-        if(this.entities[i].z==player.z)this.entities[i].render(xoff,yoff);
+        var e = this.entities[i];
+        if(e.z==player.z)e.render(xoff,yoff);
       }
     }
   }
@@ -174,6 +175,7 @@ Level.prototype.render = function(xoff,yoff){
 Level.prototype.setTile = function(x,y,z,tile){
   if(x < 0 || y < 0 || x >= this.width || y >= this.height)return;
   this.tiles[z][x+(y*this.width)] = tile.id;
+  this.data[z][x+(y*this.width)] = 0;
   if(isMultiplayer)sendTile(x,y,z,tile.id);
 };
 Level.prototype.incrementData = function(x,y,z,d){

@@ -17,10 +17,12 @@
     "node": "*"
   },
   "window": {
+    "title": "New Wizards",
+    "icon": "robots/robotJ.png",
     "toolbar": false,
     "frame": true,
     "width": 640,
-    "height": 480,
+    "height": 360,
     "position": "mouse"
 
   },

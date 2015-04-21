@@ -6,8 +6,8 @@ var gl; // A global variable for the WebGL context
 
 
 var box = canvas.getBoundingClientRect();
-canvas.width = 1280;
-canvas.height = 720;
+canvas.width = (1280/5)*4;
+canvas.height = (720/5)*4;
 context.imageSmoothingEnabled = false;
 //END
 
@@ -17,7 +17,7 @@ context.imageSmoothingEnabled = false;
 var defeat = false;
 var gameOver = false;
 var scorePosted = false;
-var isMultiplayer = true;
+var isMultiplayer = false;
 var isRunning = false;
 var startTime = new Date().getTime();
 var player = null;
@@ -99,6 +99,7 @@ function start(){
 
   }else{
     level.generateLevel(Math.random());
+    isRunning = true;
   }
 
 

@@ -1,20 +1,39 @@
 function Player(username,x,y,z){
   Entity.call(this,x,y,z);
   this.username = username;
-  this.inHand = woodenSpade;
-  this.inventory = new Inventory(10);
+  this.inventory = new Inventory(2);
+  this.inventory.addItem(woodenSpade);
+  this.inHand = this.inventory.selectedItem;
   this.bb = [0,32,0,32];
   this.actionCoolDown = 0;
   this.hunger = 0;
   this.isIll = false;
   this.thirst = 0;
   this.health = 100;
+  this.selectedTile = [];
 }
 
 Player.prototype.render = function(xoff,yoff){
-  this.inventory.render();
-  context.fillStyle = "#FF0000";
-  context.fillRect(this.x-xoff,this.y-yoff,32,32);
+  this.inventory.render();//should be moved to guihud or equivalent
+  context.beginPath();
+  context.lineWidth="3";
+  context.strokeStyle="red";
+  context.rect((this.selectedTile[0]<<5)-xoff,(this.selectedTile[1]<<5)-yoff,32,32);
+  context.stroke();
+  switch(this.movingDir){
+    case 0:
+      context.drawImage(pFront, this.x-xoff, this.y-yoff,32,32);
+      break;
+    case 1:
+      context.drawImage(pBack, this.x-xoff, this.y-yoff,32,32);
+      break;
+    case 2:
+      context.drawImage(pSide, this.x-xoff, this.y-yoff,32,32);
+      break;
+    case 3:
+      context.drawImage(pSide, this.x-xoff, this.y-yoff,32,32);
+      break;
+  }
   if(this.inHand!=="undefined")
   this.inHand.render(this.x-xoff,this.y-yoff);
 };
@@ -24,6 +43,7 @@ Player.prototype.tick = function () {
   if(this.getTileUnder()==steps&&this.z<3)this.z++;
   this.actionCoolDown--;
   this.ticks++;
+  this.inventory.tick();
   //add degrade food
   this.centreX = this.x+16;
   this.centreY = this.y+16;
@@ -34,13 +54,13 @@ Player.prototype.tick = function () {
   if(Input.downPressed())dy=2;
   if(Input.leftPressed())dx=-2;
   if(Input.rightPressed())dx=2;
-  var selectedTile = [];
-  if(this.movingDir == 0)selectedTile=[xx,yy+1];//up
-  if(this.movingDir == 1)selectedTile=[xx,yy-3];//down
-  if(this.movingDir == 2)selectedTile=[xx-1,yy-1];//left
-  if(this.movingDir == 3)selectedTile=[xx+1,yy-1];//right
-  var ix = selectedTile[0];
-  var iy = selectedTile[1];
+
+  if(this.movingDir == 0)this.selectedTile=[xx,yy+1];//up
+  if(this.movingDir == 1)this.selectedTile=[xx,yy-1];//down
+  if(this.movingDir == 2)this.selectedTile=[xx-1,yy];//left
+  if(this.movingDir == 3)this.selectedTile=[xx+1,yy];//right
+  var ix = this.selectedTile[0];
+  var iy = this.selectedTile[1];
 
 
   if(Input.actionPressed()&&this.actionCoolDown<0){
