@@ -24,6 +24,7 @@ var Input = (function() {
       crafting = true;
     }else if (event.keyCode == 81) {
       throwItem = true;
+	  console.log("Entered")
     }
 
   };

@@ -98,7 +98,7 @@ Level.prototype.generateLevel = function(seed){
   this.data[2] = Array.apply(null, new Array(this.width*this.height)).map(Number.prototype.valueOf,0);
   for (var x = 0; x < this.width; x++) {
 	  for (var y = 0; y < this.height; y++) {
-		  j = Math.floor( Math.random() * ( 0 + 2 ) );
+		  j = Math.floor( Math.random() * ( 0 + 3 ) );
 		  if(Math.floor(Math.random() * 10)==1&&this.getTile(x,y,2).hasChildren())this.tiles[2][x+(y*this.width)] = grass.getChildren()[j].id
 		  //console.log('Testing console');
 	    }

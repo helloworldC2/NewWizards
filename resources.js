@@ -1,6 +1,27 @@
 var itemsToLoad = 13.00;//add one to this whenever you add a new image to load
 var itemsLoaded = 0.00;
 
+var carrotsImg = new Image();
+carrotsImg.onload = function () {
+  itemsLoaded++;
+};
+carrotsImg.src ='tiles/Carrots.png';
+
+var spadeImg = new Image();
+spadeImg.onload = function () {
+  itemsLoaded++;
+};
+spadeImg.src ='Tools/spade.png';
+var fistImg = new Image();
+fistImg.onload = function () {
+  itemsLoaded++;
+};
+fistImg.src ='tiles/fist.png';
+var ladderImg = new Image();
+ladderImg.onload = function () {
+  itemsLoaded++;
+};
+ladderImg.src ='tiles/ladder.png';
 var grassImg = new Image();
 grassImg.onload = function () {
   itemsLoaded++;

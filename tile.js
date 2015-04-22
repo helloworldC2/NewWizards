@@ -74,6 +74,12 @@ var grass3 = new Tile(10,grass3Img,"spade");
 var stump = new Tile(11,stumpImg,"spade");
 var drit = new Tile(12,dirtImg,"NOPE");
 var logs = new Tile(13,logsImg,"NOPE");
+var solidDirt = new Tile(14,dirtImg,"spade").setSolid(true);
+var sand2Solid = new Tile(15,dirtImg,"spade").setSolid(true);
+var logsPlaceSolid = new Tile(16,logsPlaceSolid,"axe").setSolid(true);
+var PlanksSolid = new Tile(17,dirtImg,"axe").setSolid(true);
+var carrots = new Tile(18,carrotsImg,"spade");
 grass.setChildren(grass2);
 grass.setChildren(grass3);
+grass.setChildren(carrots);
 
