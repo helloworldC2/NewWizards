@@ -49,6 +49,7 @@ dirtImg.onload = function () {
   itemsLoaded++;
 };
 dirtImg.src ='tiles/dirt.png';
+
 var grass2Img = new Image();
 grass2Img.onload = function () {
   itemsLoaded++;

@@ -30,7 +30,7 @@ Inventory.prototype.render = function(){
 };
 Inventory.prototype.tick = function(){
   if(Input.throwPressed()&&this.currentItem!=fist){
-    var dirt = new EntityItem(this.currentItem,player.x+(player.movingDir==3?70:(player.movingDir==2?-32:0)),player.y+(player.movingDir==0?48:(player.movingDir==1?-64:0)),player.z,player.movingDir==3?1:player.movingDir==2?-1:(Math.random()*2)-1);
+    var  xc = new EntityItem(this.currentItem,player.x+(player.movingDir==3?70:(player.movingDir==2?-32:0)),player.y+(player.movingDir==0?48:(player.movingDir==1?-64:0)),player.z,player.movingDir==3?1:player.movingDir==2?-1:(Math.random()*2)-1);
     this.removeItem(this.currentItem);
   }
   this.selected+=Input.mouseScroll();

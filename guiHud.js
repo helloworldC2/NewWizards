@@ -115,7 +115,7 @@ Recipe.prototype.make = function(){
   for(var i=0;i<this.ingredients.length;i+=2){
     for(var j=0;j<this.ingredients[i+1];j++)player.inventory.removeItem(this.ingredients[i]);
   }
-  if(!player.inventory.addItem(this.item))var dirt = new EntityItem(this.item,player.x+(player.movingDir==3?70:(player.movingDir==2?-32:0)),player.y+(player.movingDir==0?48:(player.movingDir==1?-64:0)),player.z,player.movingDir==3?1:player.movingDir==2?-1:(Math.random()*2)-1);
+  if(!player.inventory.addItem(this.item))var asd = new EntityItem(this.item,player.x+(player.movingDir==3?70:(player.movingDir==2?-32:0)),player.y+(player.movingDir==0?48:(player.movingDir==1?-64:0)),player.z,player.movingDir==3?1:player.movingDir==2?-1:(Math.random()*2)-1);
 };
 
 var recipes = [];

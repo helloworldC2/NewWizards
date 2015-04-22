@@ -5,6 +5,7 @@ function Tile(id,image,tool) {
   this.mCost = 1.0;
   this.children = [];
   this.tool = tool;
+  console.log("this: "+this);
   //this.drop = drop;
   tile.push(this);
 }
@@ -62,24 +63,29 @@ Tile.prototype.bump = function (level,entity,x,y,z) {
 var tile = [];
 var AIR = new Tile(0,stoneImg,"NOPE");
 var VOID = new Tile(1,stoneImg,"NOPE").setSolid(true);
+
 var grass = new Tile(2,grassImg,"spade");
-var water = new Tile(3,waterImg,"bucket");
-var stone = new Tile(4,stoneImg,"pickaxe").setSolid(true);
-var sand = new Tile(5,sandImg,"spade");
-var tree = new Tile(6,greenlightImg,"axe").setSolid(true);;
-var stoneFloor = new Tile(7,larvaImg,"pickaxe");
-var steps = new Tile(8,redlightImg,"NOPE");
-var grass2 = new Tile(9,grass2Img,"spade");
-var grass3 = new Tile(10,grass3Img,"spade");
-var stump = new Tile(11,stumpImg,"spade");
-var drit = new Tile(12,dirtImg,"NOPE");
-var logs = new Tile(13,logsImg,"NOPE");
-var solidDirt = new Tile(14,dirtImg,"spade").setSolid(true);
-var sand2Solid = new Tile(15,dirtImg,"spade").setSolid(true);
-var logsPlaceSolid = new Tile(16,logsPlaceSolid,"axe").setSolid(true);
-var PlanksSolid = new Tile(17,dirtImg,"axe").setSolid(true);
-var carrots = new Tile(18,carrotsImg,"spade");
+var stoneFloor = new Tile(3,stoneImg,"pickaxe");
+var sand = new Tile(4,sandImg,"spade");
+var logs = new Tile(5,logsImg,"NOPE");
+var dirt = new Tile(6,dirtImg,"NOPE");
+
+var solidGrass = new Tile(7,grassImg,"spade");
+var stone = new Tile(8,larvaImg,"pickaxe").setSolid(true);
+var sand2Solid = new Tile(9,sandImg,"spade").setSolid(true);
+var logsPlaceSolid = new Tile(10,logsPlaceSolid,"axe").setSolid(true);
+var solidDirt = new Tile(11,dirtImg,"spade").setSolid(true);
+
+
+var PlanksSolid = new Tile(12,logsImg,"axe").setSolid(true);
+
+var carrots = new Tile(13,carrotsImg,"spade");
+var water = new Tile(14,waterImg,"bucket");
+var tree = new Tile(15,greenlightImg,"axe").setSolid(true);
+var grass2 = new Tile(16,grass2Img,"spade");
+var grass3 = new Tile(17,grass3Img,"spade");
+var steps = new Tile(18,redlightImg,"NOPE");
+var stump = new Tile(19,stumpImg,"spade");
 grass.setChildren(grass2);
 grass.setChildren(grass3);
 grass.setChildren(carrots);
-
