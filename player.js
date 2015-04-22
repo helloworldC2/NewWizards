@@ -10,13 +10,14 @@ function Player(username,x,y,z){
   this.isIll = false;
   this.thirst = 0;
   this.health = 100;
-  this.selectedTile = [];
+  this.selectedTile = null;
 }
 
 Player.prototype.render = function(xoff,yoff){
   context.beginPath();
   context.lineWidth="3";
   context.strokeStyle="red";
+  if(this.selectedTile!=null)
   context.rect((this.selectedTile[0]<<5)-xoff,(this.selectedTile[1]<<5)-yoff,32,32);
   context.stroke();
   switch(this.movingDir){
@@ -33,7 +34,7 @@ Player.prototype.render = function(xoff,yoff){
       context.drawImage(pSide, this.x-xoff, this.y-yoff,32,32);
       break;
   }
-  if(this.inHand!=="undefined")
+  if(this.inHand)
   this.inHand.render(this.x-xoff,this.y-yoff);
 };
 

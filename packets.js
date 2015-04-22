@@ -63,12 +63,12 @@ Packet02Move.prototype.writeData = Packet.prototype.writeData;
 Packet02Move.prototype.receivePacket = function(data){
   var stuff = data.toString().split(",");
   this.username = stuff[0].slice(2,stuff[0].length);
-  this.x = stuff[1];
-  this.y = stuff[2];
-  this.z = stuff[3];
-  this.movingDir = stuff[4];
+  this.x = parseInt(stuff[1]);
+  this.y = parseInt(stuff[2]);
+  this.z = parseInt(stuff[3]);
+  this.movingDir = parseInt(stuff[4]);
   this.isSwimming = stuff[5];
-  this.inHand = stuff[6];
+  this.inHand = parseInt(stuff[6]);
 };
 Packet02Move.prototype.getData = function(){
    return "02" + this.username+','+this.x+','+this.y+','+this.z+

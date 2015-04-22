@@ -17,7 +17,7 @@ context.imageSmoothingEnabled = false;
 var defeat = false;
 var gameOver = false;
 var scorePosted = false;
-var isMultiplayer = false;
+var isMultiplayer = true;
 var isRunning = false;
 var startTime = new Date().getTime();
 var player = null;
@@ -71,7 +71,7 @@ function render(){
   }
   level.render(xoff,yoff);
   for(var p=0;p<players.length;p++){
-    if(player[p].z==player.z)players[p].render(xoff,yoff);
+    if(players[p].z==player.z)players[p].render(xoff,yoff);
   }
   if(player!=null)player.render(xoff,yoff);
   context.fillText("FPS: "+fps, 10, 10);
@@ -81,7 +81,7 @@ function render(){
 
 function start(){
   level = new Level(128,128);
-  player = new Player("Dave",32,32,2);
+  player = new Player("poop",32,32,2);
   if(isMultiplayer){
     login(player);
 

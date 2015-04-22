@@ -17,7 +17,7 @@ function sendMessage(message) {
 }
 
 function parsePacket(data, rinfo) {
-    console.log("msg: "+data.toString());
+  //  console.log("msg: "+data.toString());
     var packetType = data.slice(0,2);
     loggedIn = true;
 
@@ -32,7 +32,7 @@ function parsePacket(data, rinfo) {
       }else if(players.length<1){
           isHost = true;
           isRunning = true;
-          level.generateLevel(Math.random());
+          level.generateLevel(Math.floor(Math.random()*100));
           console.log("You are host!");
       }
 
@@ -47,7 +47,7 @@ function parsePacket(data, rinfo) {
     }else if(packetType=="02"){
       var move = new Packet02Move();
       move.receivePacket(data);
-      console.log("Move: "+move.getData());
+      //console.log("Move: "+move.getData());
       for(var i=0;i<players.length;i++){
         if(players[i].username==move.username){
           players[i].x = move.x;
@@ -65,7 +65,7 @@ function parsePacket(data, rinfo) {
         level.generateLevel(sendTiles.seed);
         for(var i=0;i<sendTiles.tiles.length;i++){
           var t = sendTiles.tiles[i];
-          console.log("Changing tile: "+t.x+","+t.y+","+t.z+","+t.id);
+          //console.log("Changing tile: "+t.x+","+t.y+","+t.z+","+t.id);
           level.tiles[t.z][t.x+(t.y*level.width)] = t.id;
         }
     }else if(packetType=="06"){
